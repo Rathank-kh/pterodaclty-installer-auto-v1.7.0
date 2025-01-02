@@ -1,6 +1,6 @@
-git clone https://github.com/yourusername/yourrepository.git
+git clone https://github.com/Rathank-kh/pterodaclty-installer-auto-v1.7.0.git
 
-cd yourrepository
+cd pterodaclty-installer-auto-v1.7.0
 
 chmod +x install_pterodactyl.sh
 
