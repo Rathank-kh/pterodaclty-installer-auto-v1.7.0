@@ -15,7 +15,7 @@ sudo apt install -y curl zip unzip tar wget git nginx mysql-server php-cli php-m
 echo -e "${GREEN}Downloading Pterodactyl Panel...${NC}"
 mkdir -p /var/www/pterodactyl
 cd /var/www/pterodactyl
-curl -Lo panel.tar.gz https://github.com/pterodactyl/panel/releases/latest/download/panel.tar.gz
+curl -Lo panel.tar.gz https://github.com/pterodactyl/panel/1.7.0/latest/download/panel.tar.gz
 tar -xzvf panel.tar.gz && rm panel.tar.gz
 
 echo -e "${GREEN}Installing Composer Dependencies...${NC}"
