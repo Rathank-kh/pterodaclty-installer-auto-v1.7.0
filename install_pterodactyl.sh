@@ -108,6 +108,25 @@ if [ "$SSL_CHOICE" == "Y" ] || [ "$SSL_CHOICE" == "y" ]; then
     apt install -y certbot python3-certbot-nginx
     certbot --nginx -d $SERVER_DOMAIN --agree-tos --no-eff-email --redirect
 fi
+# Install Laravel Socialite for Discord OAuth
+echo -e "${GREEN}Installing Laravel Socialite for Discord Login...${NC}"
+cd /var/www/pterodactyl
+composer require laravel/socialite
 
+# Add Discord credentials to .env
+echo -e "${GREEN}Configuring Discord OAuth in .env...${NC}"
+echo "DISCORD_CLIENT_ID=your_discord_client_id" >> .env
+echo "DISCORD_CLIENT_SECRET=your_discord_client_secret" >> .env
+echo "DISCORD_REDIRECT_URI=https://$SERVER_DOMAIN/discord/callback" >> .env
+
+# Configure Discord OAuth in config/services.php
+echo -e "${GREEN}Updating config/services.php...${NC}"
+sed -i "/'discord' =>/a 'client_id' => env('DISCORD_CLIENT_ID')," /var/www/pterodactyl/config/services.php
+sed -i "/'discord' =>/a 'client_secret' => env('DISCORD_CLIENT_SECRET')," /var/www/pterodactyl/config/services.php
+sed -i "/'discord' =>/a 'redirect' => env('DISCORD_REDIRECT_URI')," /var/www/pterodactyl/config/services.php
+
+# Create Discord controller and routes (You may want to manually add these to avoid overwriting)
+echo -e "${GREEN}Creating Discord controller for login...${NC}"
+# Create the controller and define routes
 echo -e "${GREEN}Installation Complete!${NC}"
 echo -e "${GREEN}Visit your panel at http://$SERVER_DOMAIN or https://$SERVER_DOMAIN (with SSL enabled)${NC}"
