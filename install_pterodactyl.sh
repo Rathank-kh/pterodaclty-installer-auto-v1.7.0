@@ -15,7 +15,7 @@ sudo apt install -y curl zip unzip tar wget git nginx mysql-server php-cli php-m
 echo -e "${GREEN}Downloading Pterodactyl Panel...${NC}"
 mkdir -p /var/www/pterodactyl
 cd /var/www/pterodactyl
-curl -Lo panel.tar.gz https://github.com/pterodactyl/panel/releases/1.7.0/download/panel.tar.gz
+curl -Lo panel.tar.gz curl -Lo panel.tar.gz https://github.com/pterodactyl/panel/releases/download/v1.7.0/panel.tar.gz
 tar -xzvf panel.tar.gz && rm panel.tar.gz
 
 echo -e "${GREEN}Installing Composer Dependencies...${NC}"
@@ -63,7 +63,7 @@ php artisan p:node:add --name="$NODE_NAME" --location="Default" --fqdn="$NODE_FQ
 
 # Set up Wing for Pterodactyl
 echo -e "${GREEN}Setting up Wing...${NC}"
-curl -Lo /usr/local/bin/wing https://github.com/pterodactyl/wing/releases/download/v1.0.0/wing-linux-amd64
+curl -Lo /usr/local/bin/wing curl -Lo /usr/local/bin/wing https://github.com/pterodactyl/wing/releases/download/v1.7.0/wing-linux-amd64
 chmod +x /usr/local/bin/wing
 
 # Start Wing
