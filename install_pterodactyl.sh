@@ -15,11 +15,15 @@ sudo apt install -y curl zip unzip tar wget git nginx mysql-server php-cli php-m
 echo -e "${GREEN}Downloading Pterodactyl Panel...${NC}"
 mkdir -p /var/www/pterodactyl
 cd /var/www/pterodactyl
-curl -Lo panel.tar.gz curl -Lo panel.tar.gz https://github.com/pterodactyl/panel/releases/download/v1.7.0/panel.tar.gz
+curl -Lo panel.tar.gz https://github.com/pterodactyl/panel/releases/download/v1.7.0/panel.tar.gz
 tar -xzvf panel.tar.gz && rm panel.tar.gz
 
 echo -e "${GREEN}Installing Composer Dependencies...${NC}"
-composer install --no-dev --optimize-autoloader
+composer install --no-dev --optimize-autoloader --ignore-platform-reqs
+if [ $? -ne 0 ]; then
+    echo -e "${RED}Composer installation failed. Please check for errors.${NC}"
+    exit 1
+fi
 
 echo -e "${GREEN}Setting File Permissions...${NC}"
 chown -R www-data:www-data /var/www/pterodactyl
